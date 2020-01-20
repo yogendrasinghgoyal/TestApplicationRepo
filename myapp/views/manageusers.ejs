@@ -1,0 +1,74 @@
+<% include adminheader %>
+
+
+<section id="content">
+
+  
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="row"
+<center>
+<h1>View and Manage Users</h1>
+
+<table class="table table-bordered">
+<tr>
+<th>RegID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>Address</th>
+<th>City</th>
+<th>Gender</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<% for(row of result) { %>
+<tr>
+<td><%= row.regid %></td>
+<td><%= row.name %></td>
+<td><%= row.email %></td>
+<td><%= row.mobile %></td>
+<td><%= row.address %></td>
+<td><%= row.city %></td>
+<td><%= row.gender %></td>
+<td>
+
+<% if(row.status==1) { %>
+<a href="/admin/manageuserstatus?s=block&regid=<%= row.regid %>" title="Block User">
+<img src="../img/Block.png" style="height: 50px; width: 60px;">
+</a>
+
+<% } else { %>
+
+<a href="/admin/manageuserstatus?s=unblock&regid=<%= row.regid %>" title="un-Block User">
+<img src="../img/unBlock.png" style="height: 50px; width: 60px;">
+</a>
+
+<% } %>
+
+</td>
+<td>
+<a href="/admin/manageuserstatus?s=delete&regid=<%= row.regid %>" title="delete User">
+<img src="../img/delete.jpeg" style="height: 50px; width: 60px;">
+</a>
+
+</td>
+
+
+</tr>
+<% } %>
+
+</table>
+</center>
+</div>
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include adminfooter %>

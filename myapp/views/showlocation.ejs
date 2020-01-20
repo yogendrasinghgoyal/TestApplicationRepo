@@ -1,0 +1,135 @@
+<% include header %>
+
+<% include slider %>
+
+<script>
+
+function fetchcity(s)
+{
+	var xhttp=new XMLHttpRequest()
+	xhttp.open("GET","http://localhost:3000/fetchcity?s="+s,true)
+	xhttp.send()
+
+	xhttp.onreadystatechange=function(){
+	  if(xhttp.status==200 && xhttp.readyState==4)
+	  {
+	    var option_list="<option>Select city</option>"
+		var citylist=JSON.parse(xhttp.responseText)
+		for(let row of citylist.citylist)
+			option_list+=("<option>"+row+"</option>")
+		
+document.getElementById('city').innerHTML=option_list
+		
+		}
+	}
+}
+
+
+function fetchlocality(c)
+{
+	var xhttp=new XMLHttpRequest()
+	xhttp.open("GET","http://localhost:3000/fetchlocality?c="+c,true)
+	xhttp.send()
+
+	xhttp.onreadystatechange=function(){
+	  if(xhttp.status==200 && xhttp.readyState==4)
+	  {
+		  console.log(xhttp.responseText)
+	    var option_list="<option>Select locality</option>"
+		var localitylist=JSON.parse(xhttp.responseText)
+		for(let row of localitylist)
+			option_list+=("<option>"+row.locality+"</option>")
+		
+document.getElementById('locality').innerHTML=option_list
+		
+		}
+	}
+}
+
+
+function fetchlocation(localitynm,scnm)
+{
+	var scnm=document.getElementById('scnm').value
+	var xhttp=new XMLHttpRequest()
+	xhttp.open("GET","http://localhost:3000/fetchlocation?localitynm="+localitynm+"&scnm="+scnm,true)
+	xhttp.send()
+
+	xhttp.onreadystatechange=function(){
+	  if(xhttp.status==200 && xhttp.readyState==4)
+	  {
+	  		var locations=JSON.parse(xhttp.responseText)
+			document.getElementById('filterresult').innerHTML=locations.tbl_str
+		
+		}
+	}
+}
+
+</script>
+
+
+<section id="content">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+
+<table class="table table-bordered">
+<tr>
+<td>
+<h3>Filter Locations:</h3>
+
+<select name="state" onchange="fetchcity(this.value)">
+<option>Select state</option>
+<% for(let s of statelist) { %>
+<option><%= s %></option>
+<% } %>
+</select>
+
+&nbsp;&nbsp; - &nbsp;&nbsp;
+
+<select name="city" id="city" onchange="fetchlocality(this.value)">
+<option>Select city</option>
+</select>
+
+&nbsp;&nbsp; - &nbsp;&nbsp;
+
+<input type="hidden" id="scnm" value="<%= scnm %>"/>
+<select onchange="fetchlocation(this.value)" name="locality" id="locality">
+<option>Select locality</option>
+</select>
+
+</td>
+</tr>
+</table>
+
+<h3>Search For >> <%= scnm %></h3>
+
+<div id="filterresult"> 
+<% for(let row of locationlist) { %>
+<table class="table table-bordered" height="100px">
+<tr>
+<td  rowspan="3" width="30%">
+<img src="../locationicon/<%= row.file1nm %>" height="100" width="100" />
+</td>
+<td><b>Title : </b><%= row.title %></td> 
+</tr>
+<tr>
+<td><b>Description : </b><%= row.description %></td>
+</tr>
+<tr>
+<td><b>Address : </b><%= row.address %></td>
+</tr>
+</table>
+<hr>
+<% } %>
+</div> 
+
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include footer %>

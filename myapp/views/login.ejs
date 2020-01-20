@@ -1,0 +1,49 @@
+
+
+<% include header %>
+
+<% include slider %>
+
+
+<section id="content">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+
+<h1>Login Here</h1>
+<span font-size="20px";><%= output %> </span>
+<form method="post" action="/login">
+<table class="table table-bordered">
+<tr>
+
+    <td>Email</td>
+    <td><input type="text" name="email" placeholder="Enter Email" /></td>
+</tr>
+
+<tr>
+    <td>Password</td>
+    <td><input type="password" name="password" placeholder="Enter password" /></td>
+</tr>
+<tr>
+    <td colspan="2">
+        <input type="checkbox" value="remember" name="chk" />Remember me?
+    </td>
+</tr>
+
+<tr>
+    <td colspan="2">
+        <input type="submit" value="Login" />
+    </td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include footer %>

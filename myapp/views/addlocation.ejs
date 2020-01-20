@@ -1,0 +1,191 @@
+<% include userheader %>
+
+<script>
+
+function fetchsubcategory(c)
+{
+	var xhttp=new XMLHttpRequest()
+	xhttp.open("GET","http://localhost:3000/users/fetchSubCategory?cnm="+c,true)
+	xhttp.send()
+
+	xhttp.onreadystatechange=function(){
+	  if(xhttp.status==200 && xhttp.readyState==4)
+	  {
+	    var option_list="<option>Select sub category</option>"
+		var sclist=JSON.parse(xhttp.responseText)
+		for(let row of sclist)
+			option_list+=("<option>"+row.subcatnm+"</option>")
+		
+document.getElementById('response').innerHTML=option_list
+		}
+	}
+
+}
+
+
+function fetchcity(s)
+{
+	var xhttp=new XMLHttpRequest()
+	xhttp.open("GET","http://localhost:3000/users/fetchcity?s="+s,true)
+	xhttp.send()
+
+	xhttp.onreadystatechange=function(){
+	  if(xhttp.status==200 && xhttp.readyState==4)
+	  {
+	    var option_list="<option>Select city</option>"
+		var citylist=JSON.parse(xhttp.responseText)
+		for(let row of citylist.citylist)
+			option_list+=("<option>"+row+"</option>")
+		
+document.getElementById('city').innerHTML=option_list
+		
+		}
+	}
+}
+
+
+function fetchlocality(c)
+{
+	var xhttp=new XMLHttpRequest()
+	xhttp.open("GET","http://localhost:3000/users/fetchlocality?c="+c,true)
+	xhttp.send()
+
+	xhttp.onreadystatechange=function(){
+	  if(xhttp.status==200 && xhttp.readyState==4)
+	  {
+	    var option_list="<option>Select locality</option>"
+		var localitylist=JSON.parse(xhttp.responseText)
+		for(let row of localitylist)
+			option_list+=("<option>"+row.locality+"</option>")
+		
+document.getElementById('locality').innerHTML=option_list
+		
+		}
+	}
+}
+
+</script>
+
+
+<section id="content">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+
+
+<span style="color:orange;font-size:20px;"><%= output %></span>
+<form method="post" action="/users/addlocation" enctype="multipart/form-data" >
+<table class="table table-bordered">
+<tr>
+<td colspan="2">
+<center>
+<h2>Add Location Here!!!</h2>           
+</center>
+</td>
+</tr>
+<tr>
+<td>Title</td>
+<td><input type="text" name="title" placeholder="Enter location title"/></td>
+</tr>
+<tr>
+<td>Category</td>
+<td>
+
+<select name="category" onchange="fetchsubcategory(this.value)">
+<option>Select category</option>
+<% for(let row of clist) { %>
+ <option><%= row.catnm %></option>	
+<% } %>
+</select>
+
+</td>
+</tr>
+<tr>
+<td>Sub Category</td>
+<td>
+
+<select name="subcategory"  id="response">
+<option>Select sub category</option>
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>Description</td>
+<td><textarea name="description" placeholder="Enter location description"></textarea></td>
+</tr>
+
+<tr>
+<td>Location Images</td>
+<td>
+
+Image 1 : <input type="file" name="file1" required/><br><br>	
+Image 2 : <input type="file" name="file2" /><br><br>
+Image 3 : <input type="file" name="file3" /><br><br>
+Image 4 : <input type="file" name="file4" />
+
+</td>
+</tr>
+
+<tr>
+<td>Address</td>
+<td><textarea name="address" placeholder="Enter location address"></textarea></td>
+</tr>
+
+<tr>
+<td>State</td>
+<td>
+<select name="state" onchange="fetchcity(this.value)">
+<option>Select state</option>
+<% for(let s of statelist) { %>
+<option><%= s %></option>
+<% } %>
+</select>
+</td>
+</tr>
+
+
+<tr>
+<td>City</td>
+<td>
+<select name="city" id="city" onchange="fetchlocality(this.value)">
+<option>Select city</option>
+</select>
+	</td>
+</tr>
+
+
+<tr>
+<td>Locality</td>
+<td>
+<select name="locality" id="locality">
+<option>Select locality</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<center>
+<input type="submit"  value="Enter Location"/>
+</center>
+</td>
+</tr>
+
+</table>
+
+</form>
+
+
+
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include userfooter %>

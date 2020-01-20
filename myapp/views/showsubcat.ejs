@@ -1,0 +1,51 @@
+<% include header %>
+
+<% include slider %>
+
+<style>
+#mydiv
+{
+	min-height:450px;
+	min-width:auto;
+}
+.mydiv_part
+{
+	min-height:150px;
+	min-width:200px;
+	float:left;
+}
+</style>
+
+<section id="content">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+
+<h3>Sub Category List >> <%= catnm %></h3>
+
+<div id="mydiv">
+<% for(let i=0;i<sclist.length;i++) { %>
+
+<a href="/showlocation?scnm=<%= sclist[i].subcatnm%>">
+<div class="mydiv_part">
+<center>
+<img src="../subcaticon/<%= sclist[i].subcaticonnm %>" height="100" width="150" />
+<br>
+<b><%= sclist[i].subcatnm %></b>
+</center>
+</div>
+</a>
+
+<% } %>
+</div>
+
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include footer %>

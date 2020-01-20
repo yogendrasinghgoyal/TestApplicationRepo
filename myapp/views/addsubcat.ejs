@@ -1,0 +1,48 @@
+<% include adminheader %>
+
+
+<section id="content">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+
+<h1>Add Sub Category Here!!!</h1>
+<span style="font-size:20px; color:orange;"><%= output %></span>
+<form method="post" action="/admin/addsubcat" enctype="multipart/form-data">
+<table class="table table-bordered">
+<tr>
+<td>Category Name</td>
+<td>
+<select name="catnm">
+<option>Select category</option>
+<% for(let row of clist) { %>
+<option><%= row.catnm %></option>
+<% } %>
+</select>
+</td>
+</tr>
+<tr>
+<td>Sub Category Name</td>
+<td><input style='width:100%;height:10%;' type="text" name="subcatnm" placeholder="Enter sub category name"/></td>
+</tr>
+<tr>
+<td>Sub Category Icon	</td>
+<td><input type="file" name="caticon"/></td>
+</tr>
+<tr>
+<td colspan="2"><input type="submit" value="Add Sub Category"/></td>
+</tr>
+</table>
+</form>
+
+
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include adminfooter %>

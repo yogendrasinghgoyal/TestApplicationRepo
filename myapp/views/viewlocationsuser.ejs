@@ -1,0 +1,71 @@
+<% include userheader %>
+
+
+<section id="content">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+
+
+<center>
+<h1>View & Verify Locations</h1>
+<table class="table table-bordered">
+<tr>
+<th>LocationID</th>    
+<th>Title</th>
+<th>SubCategory</th>        
+<th>Description</th>    
+<th>Address</th>
+<th>Locality</th>    
+<th>Images</th>
+<th>Status</th>
+<th>Action</th>                
+</tr> 
+
+<% for(row of location_list) { %> 
+<tr>
+<td><%= row.locationid %></td>
+<td><%= row.title %></td>
+<td><%= row.subcategory %></td>
+<td><%= row.description %></td>
+<td><%= row.address %></td>
+<td><%= row.locality %></td>
+<td>
+<img src="../locationicon/<%= row.file1nm %>" height="50" width="30"/>
+
+<img src="../locationicon/<%= row.file1nm %>" height="50" width="30"/>
+
+<img src="../locationicon/<%= row.file1nm %>" height="50" width="30"/>
+
+<img src="../locationicon/<%= row.file1nm %>" height="50" width="30"/>
+</td>
+<td>
+<% if(row.s) {%>
+<font color="green">Verified</font>
+<% } else { %>
+<font color="red">Not Verified</font>
+<% } %>
+</td>
+<td>
+<% if(row.s==0) {%>
+<a href="">Proceed To Pay</a>
+<% } %>
+</td>
+</tr>
+<% } %>
+   
+</table>
+</center>
+
+
+
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+<% include userfooter %>

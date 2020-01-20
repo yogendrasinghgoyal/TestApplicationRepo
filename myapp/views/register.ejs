@@ -1,0 +1,89 @@
+<% include header%>
+
+<% include slider%>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+
+                <h1>Welcome to Register page </h1>
+                <span style='font-size:20px;color:orange;'><%= output %></span>
+
+
+                <form method="post" action="/register">
+
+                    <table class="table table-bordered">
+                        <tr>
+
+
+                            <td>Name</td>
+                            <td><input type="text" name="name" placeholder="Enter your name" /> </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Email</td>
+                            <td><input type="text" name="email" placeholder="Enter email" /></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Password</td>
+                            <td><input type="password" name="password" placeholder="Enter password" /></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>mobile</td>
+                            <td><input type="text" name="mobile" placeholder="Enter mobile no" /></td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td><input type="text" name="address" placeholder="Enter address" /></td>
+                        </tr>
+
+                        <tr>
+                            <td>City</td>
+                            <td>
+                                <select name="city">
+                                    <option>Select city</option>
+                                    <option>indore</option>
+                                    <option>Bhopal</option>
+                                    <option>Ujjain</option>
+
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <input type="radio" name="gender" value="male"/>
+                                Male
+                                <input type="radio" name="gender" value="female"/>
+                                Female 
+                            </td>
+                        </tr>
+                           <tr>
+                            <td colspan="2">
+                            <input type="submit" value="Register" />
+                            </td>
+                           </tr>
+
+
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<% include footer %>
